@@ -26,10 +26,9 @@ class SubmissionReviewLaunchValidator(MessageValidatorAbstract):
                 "A LtiSubmissionReviewRequest must specify the lineitem it was launched for"
             )
 
-        for_user_claim = jwt_body.get(
+        if (for_user_claim := jwt_body.get(
             "https://purl.imsglobal.org/spec/lti/claim/for_user"
-        )
-        if for_user_claim is None:
+        )) is None:
             raise LtiException(
                 "For user claim must be included in a LtiSubmissionReviewRequest"
             )

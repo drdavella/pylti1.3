@@ -129,8 +129,7 @@ class OIDCLogin(t.Generic[REQ, TCONF, SES, COOK, RED]):
         }
 
         # pass back LTI message hint if we have it
-        lti_message_hint = self._get_request_param("lti_message_hint")
-        if lti_message_hint:
+        if lti_message_hint := self._get_request_param("lti_message_hint"):
             # LTI message hint to identify LTI context within the platform
             auth_params["lti_message_hint"] = lti_message_hint
 
@@ -242,8 +241,7 @@ class OIDCLogin(t.Generic[REQ, TCONF, SES, COOK, RED]):
 
         params = {"lti1p3_new_window": "1"}
         for param_key in params_lst:
-            param_value = self._get_request_param(param_key)
-            if param_value:
+            if param_value := self._get_request_param(param_key):
                 params[param_key] = param_value
 
         page = CookiesAllowedCheckPage(
@@ -260,8 +258,7 @@ class OIDCLogin(t.Generic[REQ, TCONF, SES, COOK, RED]):
         self, data_storage: LaunchDataStorage[t.Any]
     ) -> "OIDCLogin":
         data_storage.set_request(self._request)
-        session_cookie_name = data_storage.get_session_cookie_name()
-        if session_cookie_name:
+        if session_cookie_name := data_storage.get_session_cookie_name():
             session_id = self._cookie_service.get_cookie(session_cookie_name)
             if not session_id:
                 session_id = self._get_uuid()

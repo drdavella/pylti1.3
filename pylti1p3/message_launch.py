@@ -769,10 +769,8 @@ class MessageLaunch(t.Generic[REQ, TCONF, SES, COOK]):
         self, data_storage: LaunchDataStorage[t.Any]
     ) -> "MessageLaunch":
         data_storage.set_request(self._request)
-        session_cookie_name = data_storage.get_session_cookie_name()
-        if session_cookie_name:
-            session_id = self._cookie_service.get_cookie(session_cookie_name)
-            if session_id:
+        if session_cookie_name := data_storage.get_session_cookie_name():
+            if session_id := self._cookie_service.get_cookie(session_cookie_name):
                 data_storage.set_session_id(session_id)
             else:
                 raise LtiException(f"Missing %s cookie {session_cookie_name}")

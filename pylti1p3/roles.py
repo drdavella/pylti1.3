@@ -27,8 +27,7 @@ class AbstractRole:
     def check(self) -> bool:
         for role_str in self._jwt_roles:
             role_name, role_type = self.parse_role_str(role_str)
-            res = self._check_access(role_name, role_type)
-            if res:
+            if res := self._check_access(role_name, role_type):
                 return True
         return False
 

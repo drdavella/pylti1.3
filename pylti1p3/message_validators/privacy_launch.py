@@ -23,10 +23,9 @@ class PrivacyLaunchValidator(MessageValidatorAbstract):
                 "Context claim must be omitted from a DataPrivacyLaunchRequest"
             )
 
-        for_user_claim = jwt_body.get(
+        if (for_user_claim := jwt_body.get(
             "https://purl.imsglobal.org/spec/lti/claim/for_user"
-        )
-        if for_user_claim is None:
+        )) is None:
             raise LtiException(
                 "For user claim must be included in a DataPrivacyLaunchRequest"
             )

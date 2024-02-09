@@ -167,8 +167,7 @@ class AssignmentsGradesService:
         while lineitems_url:
             lineitems, lineitems_url = self.get_lineitems_page(lineitems_url)
             for lineitem in lineitems:
-                lineitem_prop_value = lineitem.get(prop_name)
-                if lineitem_prop_value == prop_value:
+                if (lineitem_prop_value := lineitem.get(prop_name)) == prop_value:
                     return LineItem(lineitem)
         return None
 

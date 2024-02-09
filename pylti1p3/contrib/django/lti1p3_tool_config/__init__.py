@@ -27,12 +27,11 @@ class DjangoDbToolConf(ToolConfAbstract):
 
     def get_lti_tool(self, iss, client_id):
         # pylint: disable=no-member
-        lti_tool = (
+        if lti_tool := (
             self._lti_tools.get(iss)
             if client_id is None
             else self._lti_tools.get(iss, {}).get(client_id)
-        )
-        if lti_tool:
+        ):
             return lti_tool
 
         if client_id is None:

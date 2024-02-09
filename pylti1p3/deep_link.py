@@ -68,8 +68,7 @@ class DeepLink:
 
     def encode_jwt(self, message):
         headers = None
-        kid = self._registration.get_kid()
-        if kid:
+        if kid := self._registration.get_kid():
             headers = {"kid": kid}
         encoded_jwt = jwt.encode(
             message,

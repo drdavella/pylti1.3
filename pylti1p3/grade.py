@@ -33,8 +33,7 @@ class Grade:
         """
         https://www.imsglobal.org/spec/lti-ags/v2p0/#scoregiven-and-scoremaximum
         """
-        err_msg = self._validate_score(value)
-        if err_msg is not None:
+        if (err_msg := self._validate_score(value)) is not None:
             raise LtiException("Invalid scoreGiven value: " + err_msg)
         self._score_given = value
         return self
@@ -49,8 +48,7 @@ class Grade:
         """
         https://www.imsglobal.org/spec/lti-ags/v2p0/#scoregiven-and-scoremaximum
         """
-        err_msg = self._validate_score(value)
-        if err_msg is not None:
+        if (err_msg := self._validate_score(value)) is not None:
             raise LtiException("Invalid scoreMaximum value: " + err_msg)
         self._score_maximum = value
         return self

@@ -20,6 +20,5 @@ class MessageValidatorAbstract:
         if jwt_body.get("https://purl.imsglobal.org/spec/lti/claim/version") != "1.3.0":
             raise LtiException("Incorrect version, expected 1.3.0")
 
-        roles = jwt_body.get("https://purl.imsglobal.org/spec/lti/claim/roles")
-        if roles is None:
+        if (roles := jwt_body.get("https://purl.imsglobal.org/spec/lti/claim/roles")) is None:
             raise LtiException("Missing Roles Claim")

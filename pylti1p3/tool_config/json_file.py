@@ -91,8 +91,7 @@ class ToolConfJsonFile(ToolConfDict):
         with open(private_key_file, encoding="utf-8") as prf:
             self.set_private_key(iss, prf.read(), client_id=client_id)
 
-        public_key_file = iss_conf.get("public_key_file", None)
-        if public_key_file:
+        if public_key_file := iss_conf.get("public_key_file", None):
             if not public_key_file.startswith("/"):
                 public_key_file = self._configs_dir + "/" + public_key_file
 

@@ -92,14 +92,12 @@ class Registration:
 
     def get_jwks(self) -> t.List[t.Mapping[str, t.Any]]:
         keys = []
-        public_key = self.get_tool_public_key()
-        if public_key:
+        if public_key := self.get_tool_public_key():
             keys.append(Registration.get_jwk(public_key))
         return keys
 
     def get_kid(self) -> t.Optional[str]:
-        key = self.get_tool_public_key()
-        if key:
+        if key := self.get_tool_public_key():
             jwk = Registration.get_jwk(key)
             return jwk.get("kid") if jwk else None
         return None

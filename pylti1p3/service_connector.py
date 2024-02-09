@@ -68,8 +68,7 @@ class ServiceConnector:
             "jti": "lti-service-token-" + str(uuid.uuid4()),
         }
         headers = {}
-        kid = self._registration.get_kid()
-        if kid:
+        if kid := self._registration.get_kid():
             headers = {"kid": kid}
 
         # Sign the JWT with our private key (given by the platform on registration)
@@ -128,13 +127,11 @@ class ServiceConnector:
             raise LtiServiceException(r)
 
         next_page_url = None
-        link_header = r.headers.get("link", "")
-        if link_header:
-            match = re.search(
+        if link_header := r.headers.get("link", ""):
+            if match := re.search(
                 r'<([^>]*)>;\s*rel="next"',
                 link_header.replace("\n", " ").lower().strip(),
-            )
-            if match:
+            ):
                 next_page_url = match.group(1)
 
         return {

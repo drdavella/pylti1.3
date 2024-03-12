@@ -119,7 +119,7 @@ class ToolConfDict(ToolConfAbstract[Request]):
         if not isinstance(iss_conf["deployment_ids"], list):
             raise Exception(
                 f"Invalid deployment_ids value in the {str(iss_conf)} config for the {iss} issuer. "
-                f"Must be a list"
+                "Must be a list"
             )
 
     def _get_registration(self, iss: str, iss_conf: TIssConf) -> Registration:

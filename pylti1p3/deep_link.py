@@ -90,8 +90,8 @@ class DeepLink:
         html = (
             f'<form id="lti13_deep_link_auto_submit" action="{deep_link_return_url}" method="POST">'
             f'<input type="hidden" name="JWT" value="{jwt_val}" /></form>'
-            f"<script type=\"text/javascript\">document.getElementById('lti13_deep_link_auto_submit').submit();"
-            f"</script>"
+            "<script type=\"text/javascript\">document.getElementById('lti13_deep_link_auto_submit').submit();"
+            "</script>"
         )
         return html
 
